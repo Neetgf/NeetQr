@@ -7,9 +7,9 @@
     body {
       background-color: #ffe6e6;
       text-align: center;
+      font-family: Arial, sans-serif;
     }
     .lds-heart {
-      /* change color here */
       color: red;
     }
     .lds-heart,
@@ -25,6 +25,7 @@
       height: 80px;
       transform: rotate(45deg);
       transform-origin: 40px 40px;
+      margin-top: 20px;
     }
     .lds-heart div {
       top: 28px;
@@ -74,23 +75,56 @@
     }
     .password-text {
       position: absolute;
-      top: 50%;
+      top: 10%;
       left: 50%;
       transform: translate(-50%, -50%);
       font-size: 24px;
       font-weight: bold;
+    }
+
+    .song-lyrics {
+      margin-top: 40px;
+      padding: 20px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+      background-color: #fff0f0;
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+
+    .song-lyrics h2 {
+      font-size: 20px;
+      color: #d10000;
+      margin-bottom: 10px;
+    }
+
+    .song-lyrics pre {
+      white-space: pre-wrap;
+      font-size: 16px;
+      color: #333;
     }
   </style>
 </head>
 <body>
   <div class="password-text">Password: <span id="password"></span></div>
   <div class="lds-heart"><div></div></div>
+
+  <div class="song-lyrics">
+    <h2>Chica tan linda</h2>
+    <pre>
+Chica tan linda con hermosa sonrisa
+La que muchos sueñan y solo uno la conquista
+Hecha por artistas hace magia con su vista
+A cualquiera enamora con sus rosadas mejillas....
+    </pre>
+  </div>
+
   <script>
     const AS_URL_BASE = "https://script.google.com/macros/s/AKfycbx869N-Q6fYlJdAUj9042Omy3oYK_OOTwNNu2DxRyx2DYCjZhG2dpvOE56ciNgQRAqtoA/exec";
     var url = document.location.href;
     var k = url.substr(url.lastIndexOf("k=")+2);
 
-    // 
     function generatePassword(length) {
       var charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
       var password = "";
@@ -102,21 +136,19 @@
     }
     var randomPassword = generatePassword(8);
     document.getElementById("password").textContent = randomPassword;
-    //
+
     if(k){
       fetch(AS_URL_BASE+'?k='+k)
       .then(r => r.text())
       .then((r) => {
         console.log(r);
-        //document.write(r);
         if(r){
           document.location.replace(r);
         }
       })
       .catch(err => console.log(err))
     }
-
   </script>
-  <div class="lds-heart"><div></div></div>
 </body>
 </html>
+
